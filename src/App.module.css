@@ -1,0 +1,10 @@
+.app_container {
+  display: flex;
+  height: 100%;
+}
+.content {
+  width: 100%;
+}
+.side_bar {
+  height: 100%;
+}
