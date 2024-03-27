@@ -8,11 +8,11 @@ export default function SideBar() {
       className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary"
       style={{ width: "280px" }}
     >
-      <SideBarHeader/>
+      <SideBarHeader />
       <hr />
-      <SideBarBody/>
+      <SideBarBody />
       <hr />
-      <SideBarFooter/>
+      <SideBarFooter />
     </div>
   );
 }

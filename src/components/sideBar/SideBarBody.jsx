@@ -1,15 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import SideBarBodyList from "./SideBarBodyList";
-import {Home,GridViewSharp, SendSharp} from "@mui/icons-material";
+import { AppContext } from "../../store/App-store";
 
 export default function SideBarBody() {
-  let tabList = {
-    Home: <Home />,
-    Dashboard: <GridViewSharp />,
-    Messages: <SendSharp/>,
-  };
+  const { tabList } = useContext(AppContext);
 
-  let [selectedTab, setSelectedTab] = useState("Home");
   return (
     <ul className="nav nav-pills flex-column mb-auto">
       {Object.keys(tabList).map((tabName) => (
@@ -17,8 +12,6 @@ export default function SideBarBody() {
           key={tabName}
           tabName={tabName}
           tabIcon={tabList[tabName]}
-          selectedTab={selectedTab}
-          setSelectedTab={setSelectedTab}
         />
       ))}
     </ul>
