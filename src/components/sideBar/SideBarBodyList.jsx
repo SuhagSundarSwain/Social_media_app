@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { AppContext } from "../../store/App-store";
+import { AppUIContext } from "../../store/App-store";
 
 export default function SideBarBodyList({ tabName, tabIcon }) {
-  const { selectedTab, setSelectedTab } = useContext(AppContext);
+  const { selectedTab, setSelectedTab } = useContext(AppUIContext);
   return (
     <li
       onClick={() => {

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import SideBarBodyList from "./SideBarBodyList";
-import { AppContext } from "../../store/App-store";
+import { AppUIContext } from "../../store/App-store";
 
 export default function SideBarBody() {
-  const { tabList } = useContext(AppContext);
+  const { tabList } = useContext(AppUIContext);
 
   return (
     <ul className="nav nav-pills flex-column mb-auto">

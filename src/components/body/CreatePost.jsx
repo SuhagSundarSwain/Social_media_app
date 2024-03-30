@@ -1,42 +1,65 @@
+import { useContext, useRef } from "react";
+import { AppUIContext } from "../../store/App-store";
+
 export default function CreatePost() {
+  const { createPost, setSelectedTab } = useContext(AppUIContext);
+  const titleElement = useRef("");
+  const bodyElement = useRef("");
+  const tagsElement = useRef("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let newPost = {
+      id: Date.now(),
+      title: titleElement.current.value,
+      body: bodyElement.current.value,
+      reaction: "50k",
+      userId: "user-16",
+      tags: tagsElement.current.value.split(","),
+    };
+    createPost(newPost);
+    setSelectedTab("Home");
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address
+          Title
         </label>
         <input
-          type="email"
+          type="text"
           className="form-control"
-          id="exampleInputEmail1"
+          placeholder="Enter your post title"
+          id="title"
           aria-describedby="emailHelp"
+          ref={titleElement}
         />
-        <div id="emailHelp" className="form-text">
-          We'll never share your email with anyone else.
-        </div>
       </div>
       <div className="mb-3">
         <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
+          Tell more about this post
         </label>
-        <input
-          type="password"
+        <br />
+        <textarea
+          type="text"
           className="form-control"
-          id="exampleInputPassword1"
+          placeholder="Enter post details"
+          id="body"
+          ref={bodyElement}
         />
       </div>
-      <div className="mb-3 form-check">
+      <div>
+        <label className="form-label">Tags</label>
         <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
+          type="text"
+          className="form-control"
+          placeholder="Enter tags with comma(,)"
+          ref={tagsElement}
         />
-        <label className="form-check-label" htmlFor="exampleCheck1">
-          Check me out
-        </label>
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        Create Post
       </button>
     </form>
   );
