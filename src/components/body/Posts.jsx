@@ -8,7 +8,21 @@ export default function Posts() {
   const { postList, addInitialPosts } = useContext(AppUIContext);
   const [fetching, setFetching] = useState(false);
 
-  useEffect(handalGetPosts, []);
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    setFetching(true);
+    fetch("https://dummyjson.com/posts", { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        addInitialPosts(data.posts);
+        setFetching(false);
+      });
+    return () => {
+      console.log("Cleaning up useEffect.");
+      controller.abort();
+    };
+  }, []);
   function handalGetPosts() {
     setFetching(true);
     fetch("https://dummyjson.com/posts")
