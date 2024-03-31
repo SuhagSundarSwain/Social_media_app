@@ -5,7 +5,7 @@ import { AppUIContext } from "../../store/App-store";
 export default function Post({ post }) {
   const { deletePost } = useContext(AppUIContext);
   return (
-    <div className="card post-card" style={{ width: "40rem" }}>
+    <div className="card post-card" style={{ width: "50rem" }}>
       <div className="card-body">
         <h5 className="card-title">{post.title}</h5>
         <p className="card-text">{post.body}</p>
@@ -15,7 +15,7 @@ export default function Post({ post }) {
           </span>
         ))}
         <div className="alert alert-success reaction" role="alert">
-          This post is liked by {post.reaction} people.
+          This post is liked by {post.reactions} people.
         </div>
       </div>
       <span

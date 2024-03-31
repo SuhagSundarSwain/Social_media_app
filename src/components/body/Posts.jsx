@@ -1,15 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { AppUIContext } from "../../store/App-store";
 import EamptyPost from "./EamptyPost";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function Posts() {
   const { postList, addInitialPosts } = useContext(AppUIContext);
+  const [fetching, setFetching] = useState(false);
 
+  useEffect(handalGetPosts, []);
   function handalGetPosts() {
+    setFetching(true);
     fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
-      .then((data) => addInitialPosts(data.posts));
+      .then((data) => {
+        addInitialPosts(data.posts);
+        setFetching(false);
+      });
   }
 
   return (
@@ -20,7 +27,8 @@ export default function Posts() {
         // overflowX: "hidden",
       }}
     >
-      {postList.length === 0 ? (
+      {fetching && <LoadingSpinner />}
+      {!fetching && postList.length === 0 ? (
         <EamptyPost handalGetPosts={handalGetPosts} />
       ) : (
         postList.map((postData) => <Post key={postData.id} post={postData} />)

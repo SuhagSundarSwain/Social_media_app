@@ -10,6 +10,13 @@
   margin: 20px 0 0 0;
 }
 
-.eampty_post{
-  margin: 40px;
+.eampty_post {
+  margin: 10%;
+}
+
+.spinner {
+  margin: 10% 10% 1% 10%;
+  height: 80px;
+  width: 80px;
+  color: blue;
 }
