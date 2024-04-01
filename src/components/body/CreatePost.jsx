@@ -22,7 +22,7 @@ export default function CreatePost() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ width: "50%" }}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Title

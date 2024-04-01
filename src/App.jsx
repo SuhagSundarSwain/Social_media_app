@@ -4,10 +4,9 @@ import Footer from "./components/footer/Footer";
 import SideBar from "./components/sideBar/SideBar";
 import styles from "./App.module.css";
 import "./App.css";
-
 import AppContextProvider from "./store/App-store";
+import { Outlet } from "react-router-dom";
 
-import Body from "./components/body/Body";
 function App() {
   return (
     <AppContextProvider>
@@ -15,7 +14,7 @@ function App() {
         <SideBar className={styles.side_bar} />
         <div className={styles.content}>
           <Header />
-          <Body  />
+          <Outlet />
           <Footer />
         </div>
       </div>

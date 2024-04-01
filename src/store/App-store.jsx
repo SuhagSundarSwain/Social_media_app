@@ -48,10 +48,10 @@ export default function AppContextProvider({ children }) {
 
     /*it is required but commenting beacuse giving some error and resolve later*/
     /*Giving error for strictmode it is calling twice and 2nd time it is aborted */
-    return () => {
-      console.log("Cleaning up useEffect.");
-      controller.abort();
-    };
+    // return () => {
+    //   console.log("Cleaning up useEffect.");
+    //   controller.abort();
+    // };
   }, []);
 
   return (

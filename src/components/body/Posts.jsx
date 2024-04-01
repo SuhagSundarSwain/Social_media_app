@@ -20,7 +20,7 @@ export default function Posts() {
   return (
     <center
       style={{
-        height: "100vh",
+        height: "83vh",
         overflow: "scroll",
         // overflowX: "hidden",
       }}

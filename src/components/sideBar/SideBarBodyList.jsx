@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AppUIContext } from "../../store/App-store";
+import { Link } from "react-router-dom";
 
 export default function SideBarBodyList({ tabName, tabIcon }) {
   const { selectedTab, setSelectedTab } = useContext(AppUIContext);
@@ -9,8 +10,8 @@ export default function SideBarBodyList({ tabName, tabIcon }) {
         setSelectedTab(tabName);
       }}
     >
-      <a
-        href="#"
+      <Link
+        to={`/${tabName}`}
         className={
           selectedTab === tabName
             ? "nav-link active"
@@ -22,7 +23,7 @@ export default function SideBarBodyList({ tabName, tabIcon }) {
         </svg>
 
         {tabName}
-      </a>
+      </Link>
     </li>
   );
 }
