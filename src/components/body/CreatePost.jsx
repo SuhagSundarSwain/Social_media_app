@@ -1,8 +1,11 @@
 import { useContext, useRef } from "react";
 import { AppUIContext } from "../../store/App-store";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const { createPost, setSelectedTab } = useContext(AppUIContext);
+  const navigate = useNavigate();
+
   const titleElement = useRef("");
   const bodyElement = useRef("");
   const tagsElement = useRef("");
@@ -15,10 +18,11 @@ export default function CreatePost() {
       body: bodyElement.current.value,
       reaction: "50k",
       userId: "user-16",
-      tags: tagsElement.current.value.split(","),
+      tags: tagsElement.current.value.split(" "),
     };
     createPost(newPost);
     setSelectedTab("Home");
+    navigate("/Home");
   };
 
   return (
