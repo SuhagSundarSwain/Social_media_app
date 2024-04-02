@@ -1,21 +1,9 @@
-import { useContext } from "react";
 import Post from "./Post";
-import { AppUIContext } from "../../store/App-store";
 import EamptyPost from "./EamptyPost";
-import LoadingSpinner from "./LoadingSpinner";
+import { useLoaderData } from "react-router-dom";
 
 export default function Posts() {
-  const { postList, fetching } = useContext(AppUIContext);
-
-  // function handalGetPosts() {
-  //   setFetching(true);
-  //   fetch("https://dummyjson.com/posts")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       addInitialPosts(data.posts);
-  //       setFetching(false);
-  //     });
-  // }
+  const postList = useLoaderData();
 
   return (
     <center
@@ -25,12 +13,17 @@ export default function Posts() {
         // overflowX: "hidden",
       }}
     >
-      {fetching && <LoadingSpinner />}
-      {!fetching && postList.length === 0 ? (
+      {postList.length === 0 ? (
         <EamptyPost />
       ) : (
         postList.map((postData) => <Post key={postData.id} post={postData} />)
       )}
     </center>
   );
+}
+
+export async function postLoader() {
+  const response = await fetch("https://dummyjson.com/posts");
+  const data = await response.json();
+  return data.posts;
 }
