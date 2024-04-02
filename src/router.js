@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import CreatePost from "./components/body/CreatePost";
+import CreatePost, { createPostAction } from "./components/body/CreatePost";
 import Posts, { postLoader } from "./components/body/Posts";
 
 const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
       {
         path: "/CreatePost",
         element: <CreatePost />,
-        action: () => console.log("after submiiting form action runs"),
+        action: createPostAction,
       },
     ],
   },

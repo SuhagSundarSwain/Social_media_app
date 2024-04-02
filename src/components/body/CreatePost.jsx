@@ -1,32 +1,8 @@
-import { useContext, useRef } from "react";
-import { AppUIContext } from "../../store/App-store";
-import { useNavigate } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 
 export default function CreatePost() {
-  const { createPost, setSelectedTab } = useContext(AppUIContext);
-  const navigate = useNavigate();
-
-  const titleElement = useRef("");
-  const bodyElement = useRef("");
-  const tagsElement = useRef("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let newPost = {
-      id: Date.now(),
-      title: titleElement.current.value,
-      body: bodyElement.current.value,
-      reaction: "50k",
-      userId: "user-16",
-      tags: tagsElement.current.value.split(" "),
-    };
-    createPost(newPost);
-    setSelectedTab("Home");
-    navigate("/Home");
-  };
-
   return (
-    <form onSubmit={handleSubmit} style={{ width: "50%" }}>
+    <Form method="POST" style={{ width: "50%" }}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Title
@@ -37,7 +13,7 @@ export default function CreatePost() {
           placeholder="Enter your post title"
           id="title"
           aria-describedby="emailHelp"
-          ref={titleElement}
+          name="title"
         />
       </div>
       <div className="mb-3">
@@ -50,7 +26,7 @@ export default function CreatePost() {
           className="form-control"
           placeholder="Enter post details"
           id="body"
-          ref={bodyElement}
+          name="body"
         />
       </div>
       <div>
@@ -59,12 +35,19 @@ export default function CreatePost() {
           type="text"
           className="form-control"
           placeholder="Enter tags with comma(,)"
-          ref={tagsElement}
+          name="tags"
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Create Post
+        Create Post/print on console
       </button>
-    </form>
+    </Form>
   );
+}
+
+export async function createPostAction(data) {
+  const formData = await data.request.formData();
+  const postData = Object.fromEntries(formData);
+  console.log(postData);
+  return redirect("/");
 }
